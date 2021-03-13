@@ -21,14 +21,14 @@ public class UserStepDefs {
 
     @Then("the information on UI should match the database for user {string}")
     public void the_information_on_UI_should_match_the_database_for_user(String email) {
-        String query = "select firstname || ' ' || lastname as name, role, t.name, t.batch_number, location\n" +
+        String query = "select firstname, lastname, role, t.name, t.batch_number, location\n" +
                 "from users u\n" +
                 "         join team t on u.team_id = t.id\n" +
                 "         join campus c on t.campus_id = c.id\n" +
                 "where email = '"+ email +"';";
         Map<String, Object> rowMap = DBUtils.getRowMap(query);
 
-        String expectedName = (String) rowMap.get("name");
+        String expectedName = rowMap.get("firstname") + " " + rowMap.get("lastname");
         String expectedTeam = (String) rowMap.get("team");
         String expectedRole = (String) rowMap.get("role");
         String expectedBatch = "#" + rowMap.get("batch");
