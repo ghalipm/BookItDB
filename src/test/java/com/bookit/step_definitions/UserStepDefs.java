@@ -2,19 +2,10 @@ package com.bookit.step_definitions;
 
 import com.bookit.pages.MapPage;
 import com.bookit.pages.SelfPage;
-import com.bookit.utilities.BrowserUtils;
 import com.bookit.utilities.DBUtils;
-import com.bookit.utilities.Driver;
 import com.bookit.utilities.WaitUtils;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.junit.Assert;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import static org.junit.Assert.*;
