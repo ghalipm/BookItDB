@@ -18,8 +18,8 @@ public class DBUtils {
      */
     public static void createConnection() {
         String dbUrl = ConfigurationReader.get("dbUrl");
-        String dbUsername = System.getProperty("db_username") != null ? System.getProperty("db_username") : ConfigurationReader.get("dbUsername");
-        String dbPassword = System.getProperty("db_password") != null ? System.getProperty("db_password") : ConfigurationReader.get("dbPassword");
+        String dbUsername = ConfigurationReader.get("dbUsername");
+        String dbPassword = ConfigurationReader.get("dbPassword");
         try {
             connection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
         } catch (SQLException e) {

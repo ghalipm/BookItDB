@@ -4,4 +4,6 @@ import com.bookit.utilities.BrowserUtils;
 
 public class MapPage extends BasePage{
 
+
+
 }

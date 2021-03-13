@@ -10,7 +10,7 @@ import static com.bookit.utilities.BrowserUtils.hoverOver;
 import static com.bookit.utilities.WaitUtils.*;
 import static com.bookit.utilities.WaitUtils.waitUntilClickable;
 
-public class BasePage {
+public abstract class BasePage {
 
     public BasePage() {
         PageFactory.initElements(Driver.get(),this);
