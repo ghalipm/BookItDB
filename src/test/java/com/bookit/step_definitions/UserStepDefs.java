@@ -35,7 +35,7 @@ public class UserStepDefs {
 
         SelfPage selfPage = new SelfPage();
 
-        WaitUtils.waitUntilVisibilityOfAllElements(selfPage.getUserInfo());
+        WaitUtils.waitUntilTextToBe(selfPage.team,expectedTeam);
 
         String actualName = selfPage.name.getText().trim();
         String actualTeam = selfPage.team.getText().trim();
