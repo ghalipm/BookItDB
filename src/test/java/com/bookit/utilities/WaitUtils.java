@@ -12,7 +12,7 @@ import java.util.List;
 public class WaitUtils {
 
     public static WebElement waitUntilClickable(WebElement element) {
-        WebDriverWait wait = new WebDriverWait(Driver.get(),10);
+        WebDriverWait wait = new WebDriverWait(Driver.get(),5);
         return wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
@@ -22,7 +22,7 @@ public class WaitUtils {
     }
 
     public static boolean waitUntilTextToBe(WebElement element, String text) {
-        WebDriverWait wait = new WebDriverWait(Driver.get(),10);
+        WebDriverWait wait = new WebDriverWait(Driver.get(),15);
         return wait.until(ExpectedConditions.textToBePresentInElement(element,text));
     }
 
@@ -52,17 +52,17 @@ public class WaitUtils {
     }
 
     public static void waitUntilVisibilityOfAllElements(List<WebElement> elements){
-        WebDriverWait wait = new WebDriverWait(Driver.get(), 5);
+        WebDriverWait wait = new WebDriverWait(Driver.get(), 15);
         wait.until(ExpectedConditions.visibilityOfAllElements(elements));
     }
 
     public static void waitUntilVisible(WebElement element){
-        WebDriverWait wait = new WebDriverWait(Driver.get(), 5);
+        WebDriverWait wait = new WebDriverWait(Driver.get(), 10);
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
     public static boolean waitUntilTextToBePresent(WebElement element,String text) {
-        WebDriverWait wait = new WebDriverWait(Driver.get(), 5);
+        WebDriverWait wait = new WebDriverWait(Driver.get(), 10);
         return wait.until(ExpectedConditions.textToBePresentInElement(element,text));
     }
 

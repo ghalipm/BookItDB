@@ -16,17 +16,20 @@ public abstract class BasePage {
         PageFactory.initElements(Driver.get(),this);
     }
 
-    @FindBy(linkText = "map")
+    @FindBy(xpath = "//a[.='map']")
     public WebElement map;
 
-    @FindBy(linkText = "schedule")
+    @FindBy(xpath = "//a[.='schedule']")
     public WebElement schedule;
 
-    @FindBy(linkText = "hunt")
+    @FindBy(xpath = "//a[.='hunt']")
     public WebElement hunt;
 
     @FindBy(linkText = "my")
     public WebElement mySchedule;
+
+    @FindBy(linkText = "general")
+    public WebElement generalSchedule;
 
     @FindBy(xpath = "//a[@class='navbar-link' and .='my']")
     public WebElement my;
@@ -39,6 +42,8 @@ public abstract class BasePage {
 
     @FindBy(linkText = "sign out")
     public WebElement signOut;
+
+    //under "my" module: self, team, sign out
 
     public void goToSelf() {
         hoverOver(my);
@@ -54,4 +59,10 @@ public abstract class BasePage {
         hoverOver(my);
         waitUntilClickable(signOut).click();
     }
+
+    public void goToHunt() {
+        hoverOver(hunt);
+        waitUntilClickable(hunt).click();
+    }
+
 }

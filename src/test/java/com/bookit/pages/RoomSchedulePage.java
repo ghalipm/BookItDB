@@ -11,4 +11,7 @@ public class RoomSchedulePage extends BasePage{
     public String getRoomName() {
         return roomName.getText().trim();
     }
+
+
+
 }

@@ -222,9 +222,76 @@ public class DBUtils {
         }
     }
 
-    public static int getRowCount() throws Exception {
-        resultSet.last();
-        int rowCount = resultSet.getRow();
-        return rowCount;
+    /**
+     * find out the row count
+     * @return row count of this ResultSet
+     */
+    public static int getRowCount(){
+
+        int rowCount = 0 ;
+        try {
+            resultSet.last() ;
+            rowCount = resultSet.getRow() ;
+        } catch (SQLException e) {
+            System.out.println("ERROR OCCURRED WHILE GETTING ROW COUNT " + e.getMessage() );
+        }finally {
+            resetCursor();
+        }
+
+        return rowCount ;
+
     }
+
+    /**
+     * getting the cell value according to row num and column index
+     * @param rowNum
+     * @param columnIndex
+     * @return the value in String at that location
+     */
+    public static String getCellValue(int rowNum , int columnIndex) {
+
+        String cellValue = "" ;
+
+        try {
+            resultSet.absolute(rowNum) ;
+            cellValue = resultSet.getString(columnIndex ) ;
+
+        } catch (SQLException e) {
+            System.out.println("ERROR OCCURRED WHILE getCellValue " + e.getMessage() );
+        }finally {
+            resetCursor();
+        }
+        return cellValue ;
+
+    }
+
+    /**
+     * Get first row and first column
+     */
+    public static String getFirstRowFirstColumn(){
+        return getCellValue(1,1);
+    }
+
+    public static String get_i_Row_k_Column(int i, int k){
+        return getCellValue(i,k);
+    }
+
+
+    /**
+     * This method will reset the cursor to before first location
+     */
+    private static void resetCursor(){
+
+        try {
+            resultSet.beforeFirst();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+    }
+
+
+
+
+
 }
