@@ -24,7 +24,7 @@ public class Hooks {
             final byte[] screenshot = ((TakesScreenshot) Driver.get()).getScreenshotAs(OutputType.BYTES);
             scenario.attach(screenshot,"image/png", scenario.getName());
         }
-        Driver.closeDriver();
+        //Driver.closeDriver();
     }
 
     @Before("@db")

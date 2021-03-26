@@ -131,6 +131,7 @@ public class ConferenceBookingStepDefs {
                 "       t.finish,\n" +
                 "       date,\n" +
                 "       room_id,\n" +
+                "       u.role,\n" +
                 "       reservator_id\n" +
                 "from conference c\n" +
                 "         join users u on u.id = c.reservator_id\n" +
@@ -153,6 +154,8 @@ public class ConferenceBookingStepDefs {
 
         LocalDate bookedDateDB= LocalDate.parse(DBUtils.get_i_Row_k_Column(1,6));
 
+        String roleOfBookerDB=DBUtils.get_i_Row_k_Column(1, 8);
+
         int month = bookedDateDB.getMonth().getValue();
         int   dayOfMonth = bookedDateDB.getDayOfMonth();
         String bookingMothDateDB=month+"/"+dayOfMonth;
@@ -173,9 +176,18 @@ public class ConferenceBookingStepDefs {
         bookingInfosDB.add(fullNameDB);
         bookingInfosDB.add(bookingMothDateDB);
         bookingInfosDB.add(bookingTimeSlotDB);
+        //bookingInfosDB.add(roleOfBookerDB);
 
         System.out.println("================DB-Infos=====================");
         System.out.println("bookingInfosDB = " + bookingInfosDB);
+
+        System.out.println("================ Legitimate Reservation ? =====================");
+        if(roleOfBookerDB.contains("student-team-member")) {
+            System.out.println("Role Of Booker - Data Base Info = " + roleOfBookerDB);
+            System.out.println("Only team-lead should be able to reserve, so this is a bug!");
+        }else{
+            System.out.println("Legitimate reservation!");
+        }
 
         LocalDate today = LocalDate.now();
         String formattedDate = today.format(DateTimeFormatter.ofPattern("MM/dd"));
