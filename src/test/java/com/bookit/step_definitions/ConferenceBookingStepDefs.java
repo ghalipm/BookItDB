@@ -82,7 +82,6 @@ public class ConferenceBookingStepDefs {
 
     }
 
-
     @Then("the conference information on UI should match the info on DB for user {string}")
     public void the_conference_information_on_UI_should_match_the_info_on_DB_for_user(String string) {
         // Info about UI:
