@@ -25,7 +25,7 @@ public class MyBookedSchedulePage extends BasePage{
 
     public void getConference() {
         WaitUtils.waitUntilClickable(firstExistingConference.get(0));
-        System.out.println("firstExistingConference.get(0).getText() = " + firstExistingConference.get(0).getText());
+        //System.out.println("firstExistingConference.get(0).getText() = " + firstExistingConference.get(0).getText());
         firstExistingConference.get(0).click();
     }
 }

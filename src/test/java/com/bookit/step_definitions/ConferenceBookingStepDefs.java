@@ -10,6 +10,9 @@ import org.junit.Assert;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -81,6 +84,12 @@ public class ConferenceBookingStepDefs {
     public void the_user_checks_clicks_one_of_the_conferences_and_writes_down_the_room_name_capacity_date_time() {
         // Write code here that turns the phrase above into concrete actions
 
+    }
+
+    @Then("the conference information on UI should match the info on DB for user {string}")
+    public void the_conference_information_on_UI_should_match_the_info_on_DB_for_user(String string) {
+        // Info about UI:
+
         BookingSummaryWindow bookingSummaryWindow=new BookingSummaryWindow();
 
         // get info about bookingInfoTitles and bookingInfoSubTitles from UI
@@ -90,17 +99,34 @@ public class ConferenceBookingStepDefs {
         //to verify if we have collected correct info, print out title and subTitle info and verify visually against the info on UI - webpage
 
         String roomNameUI=bookingSummaryWindow.getBookedRoomName();
+        int capacityUI=bookingSummaryWindow.getBookedRoomCapacityValue();
+        String fullNameUI=bookingSummaryWindow.getBookingInfoTitles().get(3).getText();
+        String bookedMothDateUI=bookingSummaryWindow.getBookingInfoTitles().get(4).getText();
+        String bookedTimeSlotUI=bookingSummaryWindow.getBookingInfoTitles().get(5).getText();
+
+        List<String>  bookingInfosUI= new ArrayList<>();
+        bookingInfosUI.add(roomNameUI);
+        bookingInfosUI.add(capacityUI+"");
+        bookingInfosUI.add(fullNameUI);
+        bookingInfosUI.add(bookedMothDateUI);
+        bookingInfosUI.add(bookedTimeSlotUI);
+
+        System.out.println("================UI-Infos=====================");
+        System.out.println("bookingInfosUI = " + bookingInfosUI);
+
+        /*
+        System.out.println("roomNameUI = " + roomNameUI);
+        System.out.println("capacityUI = " + capacityUI);
+        System.out.println("fullNameUI = " + fullNameUI);
+        System.out.println("bookedMothDateUI = " + bookedMothDateUI);
+        System.out.println("bookedTimeSlotUI = " + bookedTimeSlotUI);
 
         System.out.println("BookingInfoTitles = " + getTextOfElements(bookingSummaryWindow.getBookingInfoTitles()));
-        System.out.println("extendedBookingInfoSubTitles = " + getTextOfElements(bookingSummaryWindow.extendedBookingInfoSubTitles()));
-        System.out.println("BookedRoomName = " + bookingSummaryWindow.getBookedRoomName());
-        System.out.println("BookedRoomCapacityValue = " + bookingSummaryWindow.getBookedRoomCapacityValue());
+        System.out.println("BookingInfoSubTitles = " + getTextOfElements(bookingSummaryWindow.extendedBookingInfoSubTitles()));
+         */
 
-    }
 
-    @Then("the conference information on UI should match the info on DB for user {string}")
-    public void the_conference_information_on_UI_should_match_the_info_on_DB_for_user(String string) {
-        // Write code here that turns the phrase above into concrete actions
+        //** info about DB:
 
         String query = "select r.name                           as Roomname,\n" +
                 "       r.capacity,\n" +
@@ -119,25 +145,47 @@ public class ConferenceBookingStepDefs {
 
         //get roomname, capacity, fullname, min(start) - max(finish), date in "M/DD" format:
         List<String> titleRowDB= DBUtils.getColumnNames(query);
-        System.out.println("titleRowDB = " + titleRowDB);
+
         String roomNameDB=DBUtils.getFirstRowFirstColumn();
-        int capacityDB= Integer.parseInt(DBUtils.get_i_Row_k_Column(1,2));
+        String capacityDB= DBUtils.get_i_Row_k_Column(1,2);
 
         String fullNameDB=DBUtils.get_i_Row_k_Column(1,3);
         String startTime=DBUtils.get_i_Row_k_Column(1,4);
         int lastRowNum=DBUtils.getRowCount();
         String finishTime = DBUtils.get_i_Row_k_Column(lastRowNum, 5);
-        String bookingTimeDB=startTime+"am - "+finishTime+"am";
+        String bookingTimeSlotDB=startTime.substring(1,5)+"am - "+finishTime.substring(1,5)+"am";
 
-        BookingSummaryWindow bookingSummaryWindow=new BookingSummaryWindow();
-        int capacityUI=bookingSummaryWindow.getBookedRoomCapacityValue();
+        LocalDate bookedDateDB= LocalDate.parse(DBUtils.get_i_Row_k_Column(1,6));
 
-        LocalDate bookedDate= LocalDate.parse(DBUtils.get_i_Row_k_Column(1,6));
+        int month = bookedDateDB.getMonth().getValue();
+        int   dayOfMonth = bookedDateDB.getDayOfMonth();
+        String bookingMothDateDB=month+"/"+dayOfMonth;
 
-        Month month = bookedDate.getMonth();
-        int   dayOfMonth = bookedDate.getDayOfMonth();
-        String monthDate=""+month+"/"+dayOfMonth;
-        System.out.println("monthDate = " + monthDate);
+        /*
+        System.out.println("titleRowDB = " + titleRowDB);
+        System.out.println("roomNameDB = " + roomNameDB);
+        System.out.println("capacityDB = " + capacityDB);
+        System.out.println("fullNameDB = " + fullNameDB);
+        System.out.println("bookingMothDateDB = " + bookingMothDateDB);
+        System.out.println("bookingTimeSlotDB = " + bookingTimeSlotDB);
+
+         */
+
+        List<String> bookingInfosDB=new ArrayList<>();
+        bookingInfosDB.add(roomNameDB);
+        bookingInfosDB.add(capacityDB);
+        bookingInfosDB.add(fullNameDB);
+        bookingInfosDB.add(bookingMothDateDB);
+        bookingInfosDB.add(bookingTimeSlotDB);
+
+        System.out.println("================DB-Infos=====================");
+        System.out.println("bookingInfosDB = " + bookingInfosDB);
+
+        LocalDate today = LocalDate.now();
+        String formattedDate = today.format(DateTimeFormatter.ofPattern("MM/dd"));
+        System.out.println("Current Time: " + formattedDate);
+
+        Assert.assertTrue(bookingInfosDB.equals(bookingInfosUI));
 
 
     }

@@ -42,7 +42,7 @@ public class HuntPage extends BasePage{
     //  //mat-option[@id='mat-option-0']
     //  (//span[@class='mat-option-text'])[1]
     // choose first available hour
-    @FindBy(xpath = "(//span[@class='mat-option-text'])[1]")
+    @FindBy(xpath = "(//span[@class='mat-option-text'])[2]")
     public WebElement firstAvailableHour;
 
 
@@ -66,15 +66,17 @@ public class HuntPage extends BasePage{
 
     String terminalHourXpath="(//span[@class='mat-option-text'])[2]" ;
 
-    @FindBy(xpath = "terminalHourXpath" )
-    public WebElement terminalHour;
+    @FindBy(xpath = "//span[@class='mat-option-text']" )
+    public List<WebElement> terminalHours;
+    // taking the hours as List<WebElement> was THE key!
+    // then one can click on specific element.
+    //taking each element or taking all as one element will not work!!!
 
     @FindBy(xpath = "(//span[@class='mat-button-wrapper'])[2]")
     public WebElement searchButton;
 
     @FindBy(xpath = "//span[.='available solid time']")
     public WebElement availableSolidTime;
-
 
     public void chooseDate() {
         waitForClickable(huntDatePicker,5);
@@ -95,15 +97,15 @@ public class HuntPage extends BasePage{
     public void chooseTerminalHour() {
         //waitForClickable(terminalHourPicker,2);
         terminalHourPicker.click(); // problem is below
-        //waitUntilClickable(terminalHour);
+        waitUntilClickable(terminalHours.get(3));
 
-        hoverOver(terminalHour); // without hoverOver, it is lost here and quits!
+        hoverOver(terminalHours.get(3)); // without hoverOver, it is lost here and quits!
        //terminalHour.click();
-       terminalHour.click();
+       terminalHours.get(3).click();
     }
 
     public void clickSearch() {
-       waitUntilVisible(terminalHour);
+       //waitUntilVisible(terminalHours.get(1));
         waitForClickable(searchButton, 2);
         searchButton.click();
     }
