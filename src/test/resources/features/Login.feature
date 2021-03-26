@@ -1,6 +1,6 @@
 Feature: Login
 
-  @smoke
+  @wip
   Scenario Outline: All types of users should be able to login
     Given the user logged in as "<userType>"
     Then the user should be on "map" page

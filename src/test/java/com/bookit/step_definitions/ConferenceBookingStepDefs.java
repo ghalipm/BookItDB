@@ -1,19 +1,16 @@
 package com.bookit.step_definitions;
 
+
 import com.bookit.pages.*;
 import com.bookit.utilities.DBUtils;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.checkerframework.checker.units.qual.C;
 import org.junit.Assert;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.Month;
+
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 import static com.bookit.utilities.BrowserUtils.getTextOfElements;
@@ -21,6 +18,12 @@ import static com.bookit.utilities.WaitUtils.waitForClickable;
 import static com.bookit.utilities.WaitUtils.waitForPageToLoad;
 
 public class ConferenceBookingStepDefs {
+
+    // this model was more challenging than other models for me.
+    // if you run hunt module, cancel any existing appointments
+    // for the user, then run the test. For a given day, you can book
+    // only one appointment and only for two hours max for that day.
+
 
 
     @When("the user goes to hunt page")
@@ -79,12 +82,6 @@ public class ConferenceBookingStepDefs {
 
     }
 
-
-    @When("the user checks-clicks one of the conferences and writes down the room name, capacity, date, time")
-    public void the_user_checks_clicks_one_of_the_conferences_and_writes_down_the_room_name_capacity_date_time() {
-        // Write code here that turns the phrase above into concrete actions
-
-    }
 
     @Then("the conference information on UI should match the info on DB for user {string}")
     public void the_conference_information_on_UI_should_match_the_info_on_DB_for_user(String string) {

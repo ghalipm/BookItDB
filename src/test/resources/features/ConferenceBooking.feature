@@ -9,5 +9,4 @@ Feature: Conference Booking
     And the user confirms the conference
     And user clicks the schedule link
     And  the user sees conferences on his - her schedule.
-    And the user checks-clicks one of the conferences and writes down the room name, capacity, date, time
     Then the conference information on UI should match the info on DB for user "karzu92@istockphoto.com"
