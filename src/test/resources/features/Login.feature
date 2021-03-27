@@ -1,6 +1,6 @@
 Feature: Login
 
-  @wip
+  @wip1a
   Scenario Outline: All types of users should be able to login
     Given the user logged in as "<userType>"
     Then the user should be on "map" page

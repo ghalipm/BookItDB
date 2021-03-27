@@ -1,6 +1,6 @@
 Feature: Conference Booking
 
-  @wip3 @db
+  @wip4 @db
   Scenario: Verify conference booking information on UI matches the info on DB
     Given the user logs in using "karzu92@istockphoto.com" "weidarfarrell"
     When the user goes to hunt page

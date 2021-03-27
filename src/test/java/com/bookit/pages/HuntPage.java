@@ -97,11 +97,11 @@ public class HuntPage extends BasePage{
     public void chooseTerminalHour() {
         //waitForClickable(terminalHourPicker,2);
         terminalHourPicker.click(); // problem is below
-        waitUntilClickable(terminalHours.get(3));
+        waitUntilClickable(terminalHours.get(1));
 
-        hoverOver(terminalHours.get(3)); // without hoverOver, it is lost here and quits!
+        hoverOver(terminalHours.get(1)); // without hoverOver, it is lost here and quits!
        //terminalHour.click();
-       terminalHours.get(3).click();
+       terminalHours.get(1).click();
     }
 
     public void clickSearch() {

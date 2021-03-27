@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+
 import static com.bookit.utilities.BrowserUtils.*;
 import static com.bookit.utilities.BrowserUtils.hoverOver;
 import static com.bookit.utilities.WaitUtils.*;
@@ -42,6 +44,11 @@ public abstract class BasePage {
 
     @FindBy(linkText = "sign out")
     public WebElement signOut;
+
+    //under map, there are 4 bookable rooms, it is better to keep them as List<WebElement>
+    //@FindBy(xpath = "//a[@class='room center-vertically']")
+    //public List<WebElement> bookableRooms;
+
 
     //under "my" module: self, team, sign out
 

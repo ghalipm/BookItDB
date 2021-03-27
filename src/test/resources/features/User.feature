@@ -1,6 +1,6 @@
 Feature: User Info
   
-  @wip @db
+  @wip2a @db
   Scenario: Verify user information on UI matches the database
     Given the user logs in using "karzu92@istockphoto.com" "weidarfarrell"
     When the user goes to self page
