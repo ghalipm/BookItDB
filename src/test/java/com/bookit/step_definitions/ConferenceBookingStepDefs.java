@@ -138,7 +138,7 @@ public class ConferenceBookingStepDefs {
                 "         join room r on c.room_id = r.id\n" +
                 "         join conference_timeline ct on c.id = ct.conference_id\n" +
                 "         join timeline t on ct.timelines_id = t.id\n" +
-                "where email = 'karzu92@istockphoto.com';";
+                "where email = 'email';";
 
         //get roomname, capacity, fullname, min(start) - max(finish), date in "M/DD" format:
         List<String> titleRowDB= DBUtils.getColumnNames(query);
